@@ -649,7 +649,8 @@ class _TSBase(object):
             # !!!!!Reconnect
             return (True, None, None)
         queue_packet = (uid, cmd_byte)
-        timeout_time = 0.5 + (len(self.read_queue) * 0.150) # timeout increases as queue gets larger
+        #timeout_time = 0.5 + (len(self.read_queue) * 0.150) # timeout increases as queue gets larger
+        timeout_time = 0.008
         self.read_queue.append(queue_packet)
         start_time = time.clock() + timeout_time
         read_data = None
