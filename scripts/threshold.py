@@ -54,18 +54,18 @@ def threshold():
 	
 	stimMsg = Stimulator()
 
-	"""
+	
 	stimMsg.channel = [1, 2]
 	stimMsg.mode = ['single', 'single']
 	stimMsg.pulse_current = [4, 4] # currenet in mA
 	stimMsg.pulse_width = [0, 0]
-	"""
-	""" CONTROLE ON-OFF """
-	stimMsg.channel = [1]
-	stimMsg.mode = ['single']
-	stimMsg.pulse_current = [18] # currenet in mA
-	stimMsg.pulse_width = [0]
 	
+	# CONTROLE ON-OFF
+	""" stimMsg.channel = [1]
+	stimMsg.mode = ['single']
+	stimMsg.pulse_current = [10] # currenet in mA
+	stimMsg.pulse_width = [0]
+	"""
 
 
 
@@ -73,29 +73,29 @@ def threshold():
 
 
 	while not rospy.is_shutdown():
-		kneeAngle  = pedalOrientation
-
-		"""
+			
 		kneeAngle  = remoteOrientation - pedalOrientation
 
-		if remoteOrientation > 30:
+		if remoteOrientation > 20:
 			stimMsg.pulse_width[0] = 500 # contrai quadríceps (anterior) caso a perna esteja elevada à frente para esticar o joelho
 		else:
 			stimMsg.pulse_width[0] = 250 # "meia contração" para estabilidade
 
 		if kneeAngle < 5:
 			stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior)
+		
+
+		kneeAngle  = pedalOrientation
+
+		# CONTROLE ON-OFF
 		"""
-
-
-		""" CONTROLE ON-OFF """
 		if kneeAngle > 180:
 			#stimMsg.pulse_width = [500, 500] # pulse width of each channel in us (micro)
 			stimMsg.pulse_width = [500] # pulse width of each channel in us (micro)
 		else:
 			#stimMsg.pulse_width = [0, 0]	
 			stimMsg.pulse_width = [abs(500*kneeAngle/180)]
-		
+		"""
 
 		plot.publish(kneeAngle)
 		pub.publish(stimMsg)
