@@ -55,18 +55,18 @@ autocalibrate: true
 #wireless_id: {'pedal': 7}
 
 ## 2 Wireless streaming test ##
-dev_names: ['pc', 'pedal', 'remote']
-dev_type: {'pc': 'DNG', 'pedal': 'WL', 'remote': 'WL'}
-imu_mode: {'pedal': 'wireless', 'remote': 'wireless'}
+dev_names: ['pc', 'lowerLeg', 'upperLeg']
+dev_type: {'pc': 'DNG', 'lowerLeg': 'WL', 'upperLeg': 'WL'}
+imu_mode: {'lowerLeg': 'wireless', 'upperLeg': 'wireless'}
 broadcast: false
 streaming: false
 streaming_interval: 0
 streaming_duration: 'unlimited'
 streaming_delay: 0
-streaming_slots: {'pedal': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'remote': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
+streaming_slots: {'lowerLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
 wired_port: {'pc': '/dev/ttyACM0'}
-wireless_dng: {'pedal': 'pc', 'remote': 'pc'}
-wireless_id: {'pedal': 1, 'remote': 7}
+wireless_dng: {'lowerLeg': 'pc', 'upperLeg': 'pc'}
+wireless_id: {'lowerLeg': 1, 'upperLeg': 7}
 
 ## 3 Wireless streaming test ##
 # dev_names: ['pc', 'pedal', 'remote1', 'remote2']
