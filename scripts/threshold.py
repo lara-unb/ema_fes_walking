@@ -12,10 +12,97 @@ from math import pi
 from tf import transformations
 import time
 
-pedalOrientation = -1
-remoteOrientation = -1
+def state0():
+	global state
+	global stimMsg
+	global pedalOrientation
+	global remoteOrientation
 
-#current_milli_time = lambda: int(round(time.time() * 1000))
+	kneeAngle  = remoteOrientation - pedalOrientation
+
+	# Leva perna direita à frente
+	while remoteOrientation < 15:
+		# comando para atuador: flexão do quadril
+		stimMsg.pulse_width[0] = 0 # relaxa o quadríceps
+		stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior)
+		stimMsg.pulse_width[2] = 500 # levanta o pé
+
+	state = state1
+
+def state1():
+	global state
+	global stimMsg
+	global pedalOrientation
+	global remoteOrientation
+
+	kneeAngle  = remoteOrientation - pedalOrientation
+
+	# Estica a perna à frente
+	while kneeAngle > 30:
+		# comando para atuador: flexão do quadril
+		stimMsg.pulse_width[0] = 500 # contrai o quadríceps
+		stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior)
+		stimMsg.pulse_width[2] = 500 # levanta o pé
+		stimMsg.pulse_width[3] = 0 # relaxa panturrilha
+
+	state = state2
+
+
+def state2():
+	global state
+	global stimMsg
+	global pedalOrientation
+	global remoteOrientation
+	
+	# Pisa no chão e executa a passada ate 0o
+	while remoteOrientation > 0:
+		# comando para atuador: extensão do quadril
+		stimMsg.pulse_width[0] = 500 # contrai o quadríceps
+		stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior)
+		stimMsg.pulse_width[2] = 0 # relaxa o pé
+		stimMsg.pulse_width[3] = 250 # meia contração da panturrilha
+
+	state = state3
+	####### SINAL PARA RECOMEÇAR O CICLO DA OUTRA PERNA ######
+	
+
+def state3():
+	global state
+	global stimMsg
+	global pedalOrientation
+	global remoteOrientation
+
+	# Termina a passada até -15 e contrai panturrilha para jogar o corpo para frente
+	while remoteOrientation > -15:
+		# comando para atuador: extensão do quadril
+		stimMsg.pulse_width[0] = 500 # contrai o quadríceps
+		stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior)
+		stimMsg.pulse_width[2] = 0 # relaxa o pé
+		stimMsg.pulse_width[3] = 500 # contrai a panturrilha
+
+	state = state4
+	
+	
+def state4():
+	global state
+	global stimMsg
+	global pedalOrientation
+	global remoteOrientation
+
+	# Termina a passada até -15 e contrai panturrilha para jogar o corpo para frente
+	while True:
+		# comando para atuador: mantem a posição do do quadril
+		stimMsg.pulse_width[0] = 500 # contrai o quadríceps
+		stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior)
+		stimMsg.pulse_width[2] = 0 # relaxa o pé
+		stimMsg.pulse_width[3] = 500 # contrai a panturrilha
+
+		# sinalDaOutraPerna (bool) indica que a outra perna já está estável no chão
+		if sinalDaOutraPerna:
+			break
+
+	state = state0
+	
 
 def pedal_callback(data):
 	global pedalOrientation
@@ -40,68 +127,37 @@ def remote_callback(data):
 	remoteOrientation = remoteOrientation * (180/pi)
     	
 
-def threshold():
-	global pedalOrientation
-	global remoteOrientation
+pedalOrientation = -1
+remoteOrientation = -1
+state = state0
+stimMsg = Stimulator()
+#[quadríceps, ísquios, 'pé caído', panturrilha]
+# Nota: músculo do 'pé caído' ativa com facilidade, usar corrente baixa
+stimMsg.channel = [1, 2, 3, 4]
+stimMsg.mode = ['single', 'single', 'single', 'single']
+stimMsg.pulse_current = [16, 4, 2, 2] # currenet in mA
+stimMsg.pulse_width = [0, 0, 0, 0]
 
-	#lastTime = current_milli_time()
+
+def threshold():
+	global state
+
 
 	rospy.init_node('threshold', anonymous = True)
 	rospy.Subscriber('imu/pedal', Imu, callback = pedal_callback)
-	#rospy.Subscriber('imu/remote', Imu, callback = remote_callback)
+	rospy.Subscriber('imu/remote', Imu, callback = remote_callback)
 	plot = rospy.Publisher('kneeAngle', Float64, queue_size = 10)
 	pub = rospy.Publisher('stimulator/ccl_update', Stimulator, queue_size=10)
-	
-	stimMsg = Stimulator()
-
-	
-	stimMsg.channel = [1, 2]
-	stimMsg.mode = ['single', 'single']
-	stimMsg.pulse_current = [4, 4] # currenet in mA
-	stimMsg.pulse_width = [0, 0]
-	
-	# CONTROLE ON-OFF
-	""" stimMsg.channel = [1]
-	stimMsg.mode = ['single']
-	stimMsg.pulse_current = [10] # currenet in mA
-	stimMsg.pulse_width = [0]
-	"""
-
-
 
 	rate = rospy.Rate(100)
 
-
 	while not rospy.is_shutdown():
-			
-		kneeAngle  = remoteOrientation - pedalOrientation
-
-		if remoteOrientation > 20:
-			stimMsg.pulse_width[0] = 500 # contrai quadríceps (anterior) caso a perna esteja elevada à frente para esticar o joelho
-		else:
-			stimMsg.pulse_width[0] = 250 # "meia contração" para estabilidade
-
-		if kneeAngle < 5:
-			stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior)
-		
-
-		kneeAngle  = pedalOrientation
-
-		# CONTROLE ON-OFF
-		"""
-		if kneeAngle > 180:
-			#stimMsg.pulse_width = [500, 500] # pulse width of each channel in us (micro)
-			stimMsg.pulse_width = [500] # pulse width of each channel in us (micro)
-		else:
-			#stimMsg.pulse_width = [0, 0]	
-			stimMsg.pulse_width = [abs(500*kneeAngle/180)]
-		"""
+		state()
+		rate.sleep()
 
 		plot.publish(kneeAngle)
+		plot.publish(remoteOrientation)
 		pub.publish(stimMsg)
-
-		rate.sleep()
-	
 
 if __name__ == '__main__':
 	threshold()
