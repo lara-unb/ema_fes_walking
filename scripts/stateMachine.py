@@ -22,7 +22,7 @@ import time
 ##################################################
 
 def state0():
-	# Começa a caminhada levando a perna direita à frente
+	# Leva a perna direita para frente e esquerda para trás
 	print('state0')
 	global state
 	global stimMsg
@@ -33,11 +33,14 @@ def state0():
 	global upperLeftLegAngle
 	global leftKneeAngle
 
+	### PERNA DIREITA ###
 	# comando para atuador: flexão do quadril direito
 	stimMsg.pulse_width[0] = 0 # relaxa o quadríceps direito
 	stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior) direito
 	stimMsg.pulse_width[2] = 500 # levanta o pé direito
 	stimMsg.pulse_width[3] = 0 # relaxa panturrilhas direito
+
+	### PERNA ESQUERDA ###
 	# comando para atuador: extensão do quadril esquerdo
 	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
 	stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
@@ -61,16 +64,19 @@ def state1():
 	global upperLeftLegAngle
 	global leftKneeAngle
 
+	### PERNA DIREITA ###
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
-	stimMsg.pulse_width[2] = 500 # levanta o pé direito
+	stimMsg.pulse_width[2] = 250 # meia contração do pé direito (calcanhar toca o chão primeiro)
 	stimMsg.pulse_width[3] = 0 # relaxa panturrilha direito
-	# comando para atuador: flexão do quadril esquerdo
+	
+	### PERNA ESQUERDA ###
+	# comando para atuador: estabiliza o quadril esquerdo
 	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
 	stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
 	stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	stimMsg.pulse_width[7] = 500 # contrai panturrilhas esquerdo
+	stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
 
 	if rightKneeAngle < 5:
 		state = state2
@@ -88,11 +94,14 @@ def state2():
 	global upperLeftLegAngle
 	global leftKneeAngle
 
+	### PERNA DIREITA ###
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
-	stimMsg.pulse_width[1] = 500 # relaxa o grupo isquiotíbias (posterior) direito
+	stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior) direito
 	stimMsg.pulse_width[2] = 0 # levanta o pé direito
-	stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
+	stimMsg.pulse_width[3] = 250 # meia contração panturrilha direito
+	
+	### PERNA ESQUERDA ###
 	# comando para atuador: estabiliza do quadril esquerdo
 	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
 	stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
@@ -103,47 +112,96 @@ def state2():
 		state = state3
 	
 
+### A PARTIR DAQUI, O MOVIMENTO É ANALOGO PARA A OUTRA PERNA ###
+
 def state3():
-	# Termina a passada até -15 e contrai panturrilha para jogar o corpo para frente
+	# Leva a perna esquerda para frente e direita para trás
 	print('state3')
 	global state
 	global stimMsg
 	global lowerRightLegAngle
 	global upperRightLegAngle
 	global rightKneeAngle
+	global lowerLeftLegAngle
+	global upperLeftLegAngle
+	global leftKneeAngle
 
-	# comando para atuador: extensão do quadril
-	stimMsg.pulse_width[0] = 500 # contrai o quadríceps
-	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior)
-	stimMsg.pulse_width[2] = 0 # relaxa o pé
-	stimMsg.pulse_width[3] = 500 # contrai a panturrilha
+	### PERNA DIREITA ###
+	# comando para atuador: extensão do quadril direito
+	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
+	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
+	stimMsg.pulse_width[2] = 0 # levanta o pé direito
+	stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
 	
-	if upperRightLegAngle < -10:
-		#state = state4
-		#caso espere sinal da outra perna, já estável no chão
-		state = state0
-		#se não, recomeça o movimento
-	
+	### PERNA ESQUERDA ###
+	# comando para atuador: flexão do quadril esquerdo
+	stimMsg.pulse_width[4] = 0 # relaxa o quadríceps esquerdo
+	stimMsg.pulse_width[5] = 500 # contrai o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[6] = 500 # levanta o pé esquerdo
+	stimMsg.pulse_width[7] = 0 # contrai panturrilhas esquerdo
+
+	if upperLeftLegAngle > 30:
+		state = state4
+		
 	
 def state4():
-	# Termina a passada até -15 e contrai panturrilha para jogar o corpo para frente
+	# Estica a perna esquerda à frente
 	print('state4')
 	global state
 	global stimMsg
 	global lowerRightLegAngle
 	global upperRightLegAngle
 	global rightKneeAngle
+	global lowerLeftLegAngle
+	global upperLeftLegAngle
+	global leftKneeAngle
 
-	# comando para atuador: mantem a posição do do quadril
-	stimMsg.pulse_width[0] = 500 # contrai o quadríceps
-	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior)
-	stimMsg.pulse_width[2] = 0 # relaxa o pé
-	stimMsg.pulse_width[3] = 500 # contrai a panturrilha
+	### PERNA DIREITA ###
+	# comando para atuador: estabiliza do quadril direito
+	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
+	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
+	stimMsg.pulse_width[2] = 0 # relaxa o pé direito
+	stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
+	
+	### PERNA ESQUERDA ###
+	# comando para atuador: extensão o quadril esquerdo
+	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[6] = 250 # meia contração do pé esquerdo (calcanhar toca o chão primeiro)
+	stimMsg.pulse_width[7] = 0 # meia contração panturrilhas esquerdo
 
-	# sinalDaOutraPerna (bool) indica que a outra perna já está estável no chão
-	#if sinalDaOutraPerna:
-	#	state = state0
-		
+	if leftKneeAngle < 5:
+		state = state5
+
+
+def state5():
+	# Pisa no chão e executa a passada ate upperLeftLeg 0 graus
+	print('state5')
+	global state
+	global stimMsg
+	global lowerRightLegAngle
+	global upperRightLegAngle
+	global rightKneeAngle
+	global lowerLeftLegAngle
+	global upperLeftLegAngle
+	global leftKneeAngle
+
+	### PERNA DIREITA ###
+	# comando para atuador: estabiliza do quadril direito
+	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
+	stimMsg.pulse_width[1] = 0 # contrai o grupo isquiotíbias (posterior) direito
+	stimMsg.pulse_width[2] = 0 # levanta o pé direito
+	stimMsg.pulse_width[3] = 500 # relaxa panturrilha direito
+	
+	### PERNA ESQUERDA ###
+	# comando para atuador: extensão do quadril esquerdo
+	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[5] = 500 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
+	stimMsg.pulse_width[7] = 250 # contrai panturrilhas esquerdo
+
+	if upperLeftLegAngle < 0:
+		state = state0	
 	
 ##################################################
 ##### Funções de Callback ########################
