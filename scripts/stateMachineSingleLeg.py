@@ -124,7 +124,7 @@ def state4():
 ##### Funções de Callback ########################
 ##################################################
 
-def pedal_callback(data):
+def lowerLeftLegAngle_callback(data):
 	global lowerLegAngle
 	global kneeAngle
 
@@ -138,7 +138,7 @@ def pedal_callback(data):
 
 
 
-def remote_callback(data):
+def upperLeftLegAngle_callback(data):
 	global upperLegAngle
 	global kneeAngle
 
@@ -176,8 +176,8 @@ def stateMachine():
 	global state
 
 	rospy.init_node('stateMachine', anonymous = True)
-	rospy.Subscriber('imu/lowerLeg', Imu, callback = pedal_callback)
-	rospy.Subscriber('imu/upperLeg', Imu, callback = remote_callback)
+	rospy.Subscriber('imu/lowerLeg', Imu, callback = lowerLeftLegAngle_callback)
+	rospy.Subscriber('imu/upperLeg', Imu, callback = upperLeftLegAngle_callback)
 	plot = rospy.Publisher('kneeAngle', Float64, queue_size = 10)
 	plot1 = rospy.Publisher('upperLegAngle', Float64, queue_size = 10)
 	pub = rospy.Publisher('stimulator/ccl_update', Stimulator, queue_size=10)

@@ -15,7 +15,7 @@ import time
 
 ####### TO DO #######
 # - remover do imu.yaml streamming de dados que não esão sendo usados
-# - mudar o nome do node
+# - remover o publish do loop da main(). Está publicando acima da taxa de atualização das imus e distorcendo o gráfico
 
 ##################################################
 ##### Máquina de estados #########################
