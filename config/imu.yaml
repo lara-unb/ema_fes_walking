@@ -55,29 +55,29 @@ autocalibrate: true
 #wireless_id: {'pedal': 7}
 
 ## 2 Wireless streaming test ##
-dev_names: ['pc', 'lowerLeg', 'upperLeg']
-dev_type: {'pc': 'DNG', 'lowerLeg': 'WL', 'upperLeg': 'WL'}
-imu_mode: {'lowerLeg': 'wireless', 'upperLeg': 'wireless'}
+#dev_names: ['pc', 'lowerLeg', 'upperLeg']
+#dev_type: {'pc': 'DNG', 'lowerLeg': 'WL', 'upperLeg': 'WL'}
+#imu_mode: {'lowerLeg': 'wireless', 'upperLeg': 'wireless'}
+#broadcast: false
+#streaming: false
+#streaming_interval: 0
+#streaming_duration: 'unlimited'
+#streaming_delay: 0
+#streaming_slots: {'lowerLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
+#wired_port: {'pc': '/dev/ttyACM0'}
+#wireless_dng: {'lowerLeg': 'pc', 'upperLeg': 'pc'}
+#wireless_id: {'lowerLeg': 1, 'upperLeg': 7}
+
+## 3 Wireless streaming test ##
+dev_names: ['pc', 'lowerLeg', 'upperLeg', 'foot']
+dev_type: {'pc': 'DNG', 'lowerLeg': 'WL', 'upperLeg': 'WL', 'foot': 'WL'}
+imu_mode: {'lowerLeg': 'wireless', 'upperLeg': 'wireless', 'foot': 'wireless'}
 broadcast: false
-streaming: false
+streaming: true
 streaming_interval: 0
 streaming_duration: 'unlimited'
 streaming_delay: 0
-streaming_slots: {'lowerLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
+streaming_slots: {'lowerLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'foot': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
 wired_port: {'pc': '/dev/ttyACM0'}
-wireless_dng: {'lowerLeg': 'pc', 'upperLeg': 'pc'}
-wireless_id: {'lowerLeg': 1, 'upperLeg': 7}
-
-## 3 Wireless streaming test ##
-# dev_names: ['pc', 'pedal', 'remote1', 'remote2']
-# dev_type: {'pc': 'DNG', 'pedal': 'WL', 'remote1': 'WL', 'remote2': 'WL'}
-# imu_mode: {'pedal': 'wireless', 'remote1': 'wireless', 'remote2': 'wireless'}
-# broadcast: false
-# streaming: true
-# streaming_interval: 0
-# streaming_duration: 'unlimited'
-# streaming_delay: 0
-# streaming_slots: {'pedal': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'remote1': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'remote2': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
-# wired_port: {'pc': '/dev/ttyACM2'}
-# wireless_dng: {'pedal': 'pc', 'remote1': 'pc', 'remote2': 'pc'}
-# wireless_id: {'pedal': 4, 'remote1': 5, 'remote2': 1}
+wireless_dng: {'lowerLeg': 'pc', 'upperLeg': 'pc', 'foot': 'pc'}
+wireless_id: {'lowerLeg': 1, 'upperLeg': 2, 'foot': 7}
