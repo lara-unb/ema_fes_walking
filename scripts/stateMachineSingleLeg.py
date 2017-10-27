@@ -126,6 +126,7 @@ def state4():
 
 def lowerLeftLegAngle_callback(data):
 	global lowerLegAngle
+	global upperLegAngle
 	global kneeAngle
 
 	qx,qy,qz,qw = data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w
@@ -140,6 +141,7 @@ def lowerLeftLegAngle_callback(data):
 
 def upperLeftLegAngle_callback(data):
 	global upperLegAngle
+	global lowerLegAngle
 	global kneeAngle
 
 	qx,qy,qz,qw = data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w

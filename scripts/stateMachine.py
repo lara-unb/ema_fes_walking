@@ -209,6 +209,7 @@ def state5():
 
 def lowerRightLegAngle_callback(data):
 	global lowerRightLegAngle
+	global upperRightLegAngle
 	global rightKneeAngle
 
 	qx,qy,qz,qw = data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w
@@ -222,6 +223,7 @@ def lowerRightLegAngle_callback(data):
 
 
 def upperRightLegAngle_callback(data):
+	global lowerRightLegAngle
 	global upperRightLegAngle
 	global rightKneeAngle
 
@@ -236,6 +238,7 @@ def upperRightLegAngle_callback(data):
 
 def lowerLeftLegAngle_callback(data):
 	global lowerLeftLegAngle
+	global upperLeftLegAngle
 	global leftKneeAngle
 
 	qx,qy,qz,qw = data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w
@@ -249,8 +252,13 @@ def lowerLeftLegAngle_callback(data):
 
 
 def upperLeftLegAngle_callback(data):
+	global lowerLeftLegAngle
 	global upperLeftLegAngle
 	global leftKneeAngle
+
+	global plotRightKnee
+	global plotLeftKnee
+	global pubStim
 
 	qx,qy,qz,qw = data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w
 	euler = transformations.euler_from_quaternion([qx, qy, qz, qw], axes='syxz')
@@ -260,6 +268,12 @@ def upperLeftLegAngle_callback(data):
 
 	leftKneeAngle  = upperLeftLegAngle - lowerLeftLegAngle
 
+	# Publica valores para estimulação e gráfico
+	plotRightKnee.publish(rightKneeAngle)
+	plotLeftKnee.publish(leftKneeAngle)
+	pubStim.publish(stimMsg)
+
+
 
 ##################################################
 ##### Iniciação de variáveis globais ############
@@ -267,6 +281,9 @@ def upperLeftLegAngle_callback(data):
 lowerRightLegAngle = -1
 upperRightLegAngle = -1
 rightKneeAngle = -1
+lowerLeftLegAngle = -1
+upperLeftLegAngle = -1
+leftKneeAngle = -1
 state = state0
 stimMsg = Stimulator()
 
@@ -284,15 +301,18 @@ stimMsg.pulse_width = [0, 0, 0, 0, 0, 0, 0, 0]
 
 def stateMachine():
 	global state
+	global plotRightKnee
+	global plotLeftKnee
+	global pubStim
 
 	rospy.init_node('stateMachine', anonymous = True)
 	rospy.Subscriber('imu/lowerRightLeg', Imu, callback = lowerRightLegAngle_callback)
 	rospy.Subscriber('imu/upperRightLeg', Imu, callback = upperRightLegAngle_callback)
 	rospy.Subscriber('imu/lowerLeftLeg', Imu, callback = lowerLeftLegAngle_callback)
 	rospy.Subscriber('imu/upperLeftLeg', Imu, callback = upperLeftLegAngle_callback)
-	plot = rospy.Publisher('rightKneeAngle', Float64, queue_size = 10)
-	plot1 = rospy.Publisher('upperRightLegAngle', Float64, queue_size = 10)
-	pub = rospy.Publisher('stimulator/ccl_update', Stimulator, queue_size=10)
+	plotRightKnee = rospy.Publisher('rightKneeAngle', Float64, queue_size = 10)
+	plotLeftKnee = rospy.Publisher('leftKneeAngle', Float64, queue_size = 10)
+	pubStim = rospy.Publisher('stimulator/ccl_update', Stimulator, queue_size=10)
 
 	rate = rospy.Rate(100)
 	
@@ -301,11 +321,6 @@ def stateMachine():
 
 	while not rospy.is_shutdown():
 		state()
-
-		# Publica valores para estimulação e gráfico
-		plot.publish(rightKneeAngle)
-		plot1.publish(upperRightLegAngle)
-		pub.publish(stimMsg)
 
 		rate.sleep()
 

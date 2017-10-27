@@ -69,15 +69,30 @@ autocalibrate: true
 #wireless_id: {'lowerLeg': 1, 'upperLeg': 7}
 
 ## 3 Wireless streaming test ##
-dev_names: ['pc', 'lowerLeg', 'upperLeg', 'foot']
-dev_type: {'pc': 'DNG', 'lowerLeg': 'WL', 'upperLeg': 'WL', 'foot': 'WL'}
-imu_mode: {'lowerLeg': 'wireless', 'upperLeg': 'wireless', 'foot': 'wireless'}
+#dev_names: ['pc', 'lowerLeg', 'upperLeg', 'foot']
+#dev_type: {'pc': 'DNG', 'lowerLeg': 'WL', 'upperLeg': 'WL', 'foot': 'WL'}
+#imu_mode: {'lowerLeg': 'wireless', 'upperLeg': 'wireless', 'foot': 'wireless'}
+#broadcast: false
+#streaming: true
+#streaming_interval: 0
+#streaming_duration: 'unlimited'
+#streaming_delay: 0
+#streaming_slots: {'lowerLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'foot': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
+#wired_port: {'pc': '/dev/ttyACM0'}
+#wireless_dng: {'lowerLeg': 'pc', 'upperLeg': 'pc', 'foot': 'pc'}
+#wireless_id: {'lowerLeg': 1, 'upperLeg': 2, 'foot': 7}
+
+
+## 4 Wireless streaming test ##
+dev_names: ['pc', 'lowerRightLeg', 'upperRightLeg', 'lowerLeftLeg', 'upperLeftLeg']
+dev_type: {'pc': 'DNG', 'lowerRightLeg': 'WL', 'upperRightLeg': 'WL', 'lowerLeftLeg': 'WL', 'upperLeftLeg': 'WL'}
+imu_mode: {'lowerRightLeg': 'wireless', 'upperRightLeg': 'wireless', 'lowerLeftLeg': 'wireless', 'upperLeftLeg': 'wireless'}
 broadcast: false
 streaming: true
 streaming_interval: 0
 streaming_duration: 'unlimited'
 streaming_delay: 0
-streaming_slots: {'lowerLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'foot': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
+streaming_slots: {'lowerRightLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperRightLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'lowerLeftLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeftLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
 wired_port: {'pc': '/dev/ttyACM0'}
-wireless_dng: {'lowerLeg': 'pc', 'upperLeg': 'pc', 'foot': 'pc'}
-wireless_id: {'lowerLeg': 1, 'upperLeg': 2, 'foot': 7}
+wireless_dng: {'lowerRightLeg': 'pc', 'upperRightLeg': 'pc', 'lowerLeftLeg': 'pc', 'upperLeftLeg': 'pc'}
+wireless_id: {'lowerRightLeg': 1, 'upperRightLeg': 2, 'lowerLeftLeg': 7, 'upperLeftLeg': 3}
