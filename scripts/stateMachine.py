@@ -5,6 +5,7 @@ import rospy
 #import ros msgs
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float64
+from std_msgs.msg import Int8
 from ema_common_msgs.msg import Stimulator
 
 # import utilities
@@ -37,18 +38,18 @@ def state0():
 	# comando para atuador: flexão do quadril direito
 	stimMsg.pulse_width[0] = 0 # relaxa o quadríceps direito
 	stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior) direito
-	stimMsg.pulse_width[2] = 500 # levanta o pé direito
-	stimMsg.pulse_width[3] = 0 # relaxa panturrilhas direito
+	#stimMsg.pulse_width[2] = 500 # levanta o pé direito
+	#stimMsg.pulse_width[3] = 0 # relaxa panturrilhas direito
 
 	### PERNA ESQUERDA ###
 	# comando para atuador: extensão do quadril esquerdo
-	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
+	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
+	#stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
+	#stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
 
 
-	if upperRightLegAngle > 30:
+	if upperRightLegAngle > 15:
 		state = state1
 
 
@@ -68,15 +69,15 @@ def state1():
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
-	stimMsg.pulse_width[2] = 250 # meia contração do pé direito (calcanhar toca o chão primeiro)
-	stimMsg.pulse_width[3] = 0 # relaxa panturrilha direito
+	#stimMsg.pulse_width[2] = 250 # meia contração do pé direito (calcanhar toca o chão primeiro)
+	#stimMsg.pulse_width[3] = 0 # relaxa panturrilha direito
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: estabiliza o quadril esquerdo
-	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
+	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
+	#stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
+	#stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
 
 	if rightKneeAngle < 5:
 		state = state2
@@ -98,15 +99,15 @@ def state2():
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior) direito
-	stimMsg.pulse_width[2] = 0 # levanta o pé direito
-	stimMsg.pulse_width[3] = 250 # meia contração panturrilha direito
+	#stimMsg.pulse_width[2] = 0 # levanta o pé direito
+	#stimMsg.pulse_width[3] = 250 # meia contração panturrilha direito
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: estabiliza do quadril esquerdo
-	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	stimMsg.pulse_width[7] = 500 # contrai panturrilhas esquerdo
+	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
+	#stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
+	#stimMsg.pulse_width[7] = 500 # contrai panturrilhas esquerdo
 
 	if upperRightLegAngle < 0:
 		state = state3
@@ -130,17 +131,17 @@ def state3():
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
-	stimMsg.pulse_width[2] = 0 # levanta o pé direito
-	stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
+	#stimMsg.pulse_width[2] = 0 # levanta o pé direito
+	#stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: flexão do quadril esquerdo
-	stimMsg.pulse_width[4] = 0 # relaxa o quadríceps esquerdo
-	stimMsg.pulse_width[5] = 500 # contrai o grupo isquiotíbias (posterior) esquerdo
-	stimMsg.pulse_width[6] = 500 # levanta o pé esquerdo
-	stimMsg.pulse_width[7] = 0 # contrai panturrilhas esquerdo
+	#stimMsg.pulse_width[4] = 0 # relaxa o quadríceps esquerdo
+	#stimMsg.pulse_width[5] = 500 # contrai o grupo isquiotíbias (posterior) esquerdo
+	#stimMsg.pulse_width[6] = 500 # levanta o pé esquerdo
+	#stimMsg.pulse_width[7] = 0 # contrai panturrilhas esquerdo
 
-	if upperLeftLegAngle > 30:
+	if upperLeftLegAngle > 15:
 		state = state4
 		
 	
@@ -160,15 +161,15 @@ def state4():
 	# comando para atuador: estabiliza do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
-	stimMsg.pulse_width[2] = 0 # relaxa o pé direito
-	stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
+	#stimMsg.pulse_width[2] = 0 # relaxa o pé direito
+	#stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: extensão o quadril esquerdo
-	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	stimMsg.pulse_width[6] = 250 # meia contração do pé esquerdo (calcanhar toca o chão primeiro)
-	stimMsg.pulse_width[7] = 0 # meia contração panturrilhas esquerdo
+	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
+	#stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	#stimMsg.pulse_width[6] = 250 # meia contração do pé esquerdo (calcanhar toca o chão primeiro)
+	#stimMsg.pulse_width[7] = 0 # meia contração panturrilhas esquerdo
 
 	if leftKneeAngle < 5:
 		state = state5
@@ -190,15 +191,15 @@ def state5():
 	# comando para atuador: estabiliza do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 0 # contrai o grupo isquiotíbias (posterior) direito
-	stimMsg.pulse_width[2] = 0 # levanta o pé direito
-	stimMsg.pulse_width[3] = 500 # relaxa panturrilha direito
+	#stimMsg.pulse_width[2] = 0 # levanta o pé direito
+	#stimMsg.pulse_width[3] = 500 # relaxa panturrilha direito
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: extensão do quadril esquerdo
-	stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[5] = 500 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	stimMsg.pulse_width[7] = 250 # contrai panturrilhas esquerdo
+	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
+	#stimMsg.pulse_width[5] = 500 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
+	#stimMsg.pulse_width[7] = 250 # contrai panturrilhas esquerdo
 
 	if upperLeftLegAngle < 0:
 		state = state0	
@@ -215,7 +216,7 @@ def lowerRightLegAngle_callback(data):
 	qx,qy,qz,qw = data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w
 	euler = transformations.euler_from_quaternion([qx, qy, qz, qw], axes='syxz')
 
-	lowerRightLegAngle = euler[0]
+	lowerRightLegAngle = -euler[0]
 	lowerRightLegAngle = lowerRightLegAngle * (180/pi)
  
 	rightKneeAngle  = upperRightLegAngle - lowerRightLegAngle
@@ -230,7 +231,7 @@ def upperRightLegAngle_callback(data):
 	qx,qy,qz,qw = data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w
 	euler = transformations.euler_from_quaternion([qx, qy, qz, qw], axes='syxz')
 
-	upperRightLegAngle = euler[0]
+	upperRightLegAngle = -euler[0]
 	upperRightLegAngle = upperRightLegAngle * (180/pi)
 
 	rightKneeAngle  = upperRightLegAngle - lowerRightLegAngle
@@ -256,10 +257,6 @@ def upperLeftLegAngle_callback(data):
 	global upperLeftLegAngle
 	global leftKneeAngle
 
-	global plotRightKnee
-	global plotLeftKnee
-	global pubStim
-
 	qx,qy,qz,qw = data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w
 	euler = transformations.euler_from_quaternion([qx, qy, qz, qw], axes='syxz')
 
@@ -268,11 +265,10 @@ def upperLeftLegAngle_callback(data):
 
 	leftKneeAngle  = upperLeftLegAngle - lowerLeftLegAngle
 
-	# Publica valores para estimulação e gráfico
-	plotRightKnee.publish(rightKneeAngle)
-	plotLeftKnee.publish(leftKneeAngle)
-	pubStim.publish(stimMsg)
 
+def upperRightLeg_buttons_callback(data):
+	#print(data)
+	pass
 
 
 ##################################################
@@ -284,16 +280,26 @@ rightKneeAngle = -1
 lowerLeftLegAngle = -1
 upperLeftLegAngle = -1
 leftKneeAngle = -1
+
+# estado atual
 state = state0
+# lista com todos estados, para implementação de botões
+stateList = [state0, state1, state2, state3, state4, state5]
+
+
 stimMsg = Stimulator()
 
 #[quadrícepsDireito, ísquiosDireito, 'pé caído'Direito, panturrilhaDireito, quadrícepsEsquerdo, ísquiosEsquerdo, 'pé caído'Esquerdo, panturrilhaEsquerdo]
 # Nota: músculo do 'pé caído' ativa com facilidade, usar corrente baixa
-stimMsg.channel = [1, 2, 3, 4, 5, 6, 7, 8]
-stimMsg.mode = ['single', 'single', 'single', 'single', 'single', 'single', 'single', 'single']
-stimMsg.pulse_current = [16, 4, 2, 2, 16, 4, 2, 2] # currenet in mA
-stimMsg.pulse_width = [0, 0, 0, 0, 0, 0, 0, 0]
+#stimMsg.channel = [1, 2, 3, 4, 5, 6, 7, 8]
+#stimMsg.mode = ['single', 'single', 'single', 'single', 'single', 'single', 'single', 'single']
+##stimMsg.pulse_current = [2, 2, 2, 2, 0, 0, 0, 0] # currenet in mA
+##stimMsg.pulse_width = [0, 0, 0, 0, 0, 0, 0, 0]
 
+stimMsg.channel = [1, 2]
+stimMsg.mode = ['single', 'single']
+stimMsg.pulse_current = [8, 6] # currenet in mA
+stimMsg.pulse_width = [0, 0]
 
 ##################################################
 ##### Loop do ROS ################################
@@ -301,26 +307,41 @@ stimMsg.pulse_width = [0, 0, 0, 0, 0, 0, 0, 0]
 
 def stateMachine():
 	global state
-	global plotRightKnee
-	global plotLeftKnee
-	global pubStim
 
+	# inicia nó
 	rospy.init_node('stateMachine', anonymous = True)
+
+	# Inscreve nos canais de pulibação de ângulos de cada sensor
 	rospy.Subscriber('imu/lowerRightLeg', Imu, callback = lowerRightLegAngle_callback)
 	rospy.Subscriber('imu/upperRightLeg', Imu, callback = upperRightLegAngle_callback)
 	rospy.Subscriber('imu/lowerLeftLeg', Imu, callback = lowerLeftLegAngle_callback)
 	rospy.Subscriber('imu/upperLeftLeg', Imu, callback = upperLeftLegAngle_callback)
+	rospy.Subscriber('imu/upperRightLeg_buttons', Int8, callback = upperRightLeg_buttons_callback)
+
+	# Publica ângulos relativos dos joelhos para mostrar em gráfico
 	plotRightKnee = rospy.Publisher('rightKneeAngle', Float64, queue_size = 10)
 	plotLeftKnee = rospy.Publisher('leftKneeAngle', Float64, queue_size = 10)
+
+	# Publica valores de eletroestimulação a serem lidos pelo estimulador
 	pubStim = rospy.Publisher('stimulator/ccl_update', Stimulator, queue_size=10)
 
-	rate = rospy.Rate(100)
+	# Define taxa de atualização de estados e publicação para gráfico e eletroestimulador.
+	# Esta permite definir o tempo entre amostras, porém aumentará o efeito de
+	# quantização (digitalização) do sinal caso a frequência de publicação seja maior que
+	# a de amostragem.
+	rate = rospy.Rate(50)
 	
 	#espera terminar calibragem
 	rospy.sleep(5)
 
 	while not rospy.is_shutdown():
 		state()
+
+		# Publica valores para estimulação e gráfico
+		plotRightKnee.publish(rightKneeAngle)
+		plotLeftKnee.publish(leftKneeAngle)
+		pubStim.publish(stimMsg)
+
 
 		rate.sleep()
 

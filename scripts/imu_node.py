@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import rospy
 
@@ -75,7 +75,7 @@ def main():
                         idx = 0
                         
                         for slot in imu_manager.streaming_slots[name]:
-                            #print name, slot
+                                #print name, slot
                             
                             if slot == 'getTaredOrientationAsQuaternion':
                                                             
@@ -102,13 +102,9 @@ def main():
                                 
                                 idx = idx + 3
                                 
-                                print type(streaming_data)
-                                
                             elif slot == 'getButtonState':
-
-                                if type(streaming_data) == 'tuple':
+                                if isinstance(streaming_data, tuple):
                                     buttons = streaming_data[idx]
-                                
                                     idx = idx + 1
                                 else:
                                     # imu is only streaming button state, result is not a tuple
