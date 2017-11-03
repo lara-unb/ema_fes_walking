@@ -5,7 +5,7 @@
   <node name="imu" pkg="ema_tao" type="imu_node.py" output="screen" />
 
   <!-- CODIGO RAPHAEL - THRESHOLD PARA ESTIMULAÇÃO-->
-  <node name="stateMachine" pkg="ema_tao" type="stateMachine.py" output="screen" />
+  <node name="stateMachine" pkg="ema_tao" type="recorder.py" output="screen" />
 
   </group>
 
