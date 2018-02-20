@@ -5,7 +5,7 @@
   <node name="imu" pkg="ema_tao" type="imu_node.py" output="screen" />
 
   <!-- CODIGO PARA GRAVAR DADOS-->
-  <node name="recorder" pkg="ema_tao" type="recorder.py" output="screen" />
+  <node name="recorder" pkg="ema_tao" type="recorderSingle.py" output="screen" />
 
   </group>
 

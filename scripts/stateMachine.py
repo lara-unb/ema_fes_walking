@@ -43,13 +43,13 @@ def state0():
 
 	### PERNA ESQUERDA ###
 	# comando para atuador: extensão do quadril esquerdo
-	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	#stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[3] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
 	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
 	#stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
 
 
-	if upperRightLegAngle > 15:
+	if upperRightLegAngle > 10:
 		state = state1
 
 
@@ -74,12 +74,12 @@ def state1():
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: estabiliza o quadril esquerdo
-	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	#stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[3] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
 	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
 	#stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
 
-	if rightKneeAngle < 5:
+	if rightKneeAngle < 10:
 		state = state2
 
 
@@ -104,8 +104,8 @@ def state2():
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: estabiliza do quadril esquerdo
-	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	#stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[3] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
 	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
 	#stimMsg.pulse_width[7] = 500 # contrai panturrilhas esquerdo
 
@@ -136,12 +136,12 @@ def state3():
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: flexão do quadril esquerdo
-	#stimMsg.pulse_width[4] = 0 # relaxa o quadríceps esquerdo
-	#stimMsg.pulse_width[5] = 500 # contrai o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[2] = 0 # relaxa o quadríceps esquerdo
+	stimMsg.pulse_width[3] = 500 # contrai o grupo isquiotíbias (posterior) esquerdo
 	#stimMsg.pulse_width[6] = 500 # levanta o pé esquerdo
 	#stimMsg.pulse_width[7] = 0 # contrai panturrilhas esquerdo
 
-	if upperLeftLegAngle > 15:
+	if upperLeftLegAngle > 10:
 		state = state4
 		
 	
@@ -166,12 +166,12 @@ def state4():
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: extensão o quadril esquerdo
-	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	#stimMsg.pulse_width[5] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[3] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
 	#stimMsg.pulse_width[6] = 250 # meia contração do pé esquerdo (calcanhar toca o chão primeiro)
 	#stimMsg.pulse_width[7] = 0 # meia contração panturrilhas esquerdo
 
-	if leftKneeAngle < 5:
+	if leftKneeAngle < 10:
 		state = state5
 
 
@@ -196,8 +196,8 @@ def state5():
 	
 	### PERNA ESQUERDA ###
 	# comando para atuador: extensão do quadril esquerdo
-	#stimMsg.pulse_width[4] = 500 # contrai o quadríceps esquerdo
-	#stimMsg.pulse_width[5] = 500 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[3] = 500 # relaxa o grupo isquiotíbias (posterior) esquerdo
 	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
 	#stimMsg.pulse_width[7] = 250 # contrai panturrilhas esquerdo
 
@@ -296,10 +296,12 @@ stimMsg = Stimulator()
 ##stimMsg.pulse_current = [2, 2, 2, 2, 0, 0, 0, 0] # currenet in mA
 ##stimMsg.pulse_width = [0, 0, 0, 0, 0, 0, 0, 0]
 
-stimMsg.channel = [1, 2]
-stimMsg.mode = ['single', 'single']
-stimMsg.pulse_current = [8, 6] # currenet in mA
-stimMsg.pulse_width = [0, 0]
+#[quadrícepsDireito, ísquiosDireito, quadrícepsEsquerdo, ísquiosEsquerdo]
+stimMsg.channel = [1, 2, 3, 4]
+stimMsg.mode = ['single', 'single', 'single', 'single']
+stimMsg.pulse_current = [18, 18	, 18, 16] # currenet in mA
+#stimMsg.pulse_current = [10, 10, 10, 10] # currenet in mA
+stimMsg.pulse_width = [0, 0, 0, 0]
 
 ##################################################
 ##### Loop do ROS ################################
