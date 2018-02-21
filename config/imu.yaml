@@ -41,18 +41,18 @@ autocalibrate: true
 # wired_port: {'pedal': '/dev/ttyACM1', 'remote': '/dev/ttyACM2'}
 
 ## 1 Wireless streaming test ##
-dev_names: ['pc', 'angle']
-dev_type: {'pc': 'DNG', 'angle': 'WL'}
-imu_mode: {'angle': 'wireless'}
-broadcast: false
-streaming: true
-streaming_interval: 0
-streaming_duration: 'unlimited'
-streaming_delay: 0
-streaming_slots: {'angle': ['getTaredOrientationAsQuaternion']}
-wired_port: {'pc': '/dev/ttyACM0'}
-wireless_dng: {'angle': 'pc'}
-wireless_id: {'angle': 2}
+#dev_names: ['pc', 'angle']
+#dev_type: {'pc': 'DNG', 'angle': 'WL'}
+#imu_mode: {'angle': 'wireless'}
+#broadcast: false
+#streaming: true
+#streaming_interval: 0
+#streaming_duration: 'unlimited'
+#streaming_delay: 0
+#streaming_slots: {'angle': ['getTaredOrientationAsQuaternion']}
+#wired_port: {'pc': '/dev/ttyACM0'}
+#wireless_dng: {'angle': 'pc'}
+#wireless_id: {'angle': 7}
 
 ## 2 Wireless streaming test - stateMachineSingleLeg.py setup ##
 #dev_names: ['pc', 'lowerLeg', 'upperLeg']
@@ -84,15 +84,15 @@ wireless_id: {'angle': 2}
 
 
 ## 4 Wireless streaming test - stateMachine.py setup ##
-#dev_names: ['pc', 'lowerRightLeg', 'upperRightLeg', 'lowerLeftLeg', 'upperLeftLeg']
-#dev_type: {'pc': 'DNG', 'lowerRightLeg': 'WL', 'upperRightLeg': 'WL', 'lowerLeftLeg': 'WL', 'upperLeftLeg': 'WL'}
-#imu_mode: {'lowerRightLeg': 'wireless', 'upperRightLeg': 'wireless', 'lowerLeftLeg': 'wireless', 'upperLeftLeg': 'wireless'}
-#broadcast: false
-#streaming: true
-#streaming_interval: 0
-#streaming_duration: 'unlimited'
-#streaming_delay: 0
-#streaming_slots: {'lowerRightLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperRightLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'lowerLeftLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeftLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
-#wired_port: {'pc': '/dev/ttyACM0'}
-#wireless_dng: {'lowerRightLeg': 'pc', 'upperRightLeg': 'pc', 'lowerLeftLeg': 'pc', 'upperLeftLeg': 'pc'}
-#wireless_id: {'lowerRightLeg': 3, 'upperRightLeg': 7, 'lowerLeftLeg': 1, 'upperLeftLeg': 2}
+dev_names: ['pc', 'lowerRightLeg', 'upperRightLeg', 'lowerLeftLeg', 'upperLeftLeg']
+dev_type: {'pc': 'DNG', 'lowerRightLeg': 'WL', 'upperRightLeg': 'WL', 'lowerLeftLeg': 'WL', 'upperLeftLeg': 'WL'}
+imu_mode: {'lowerRightLeg': 'wireless', 'upperRightLeg': 'wireless', 'lowerLeftLeg': 'wireless', 'upperLeftLeg': 'wireless'}
+broadcast: false
+streaming: true
+streaming_interval: 0
+streaming_duration: 'unlimited'
+streaming_delay: 0
+streaming_slots: {'lowerRightLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperRightLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'lowerLeftLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState'], 'upperLeftLeg': ['getTaredOrientationAsQuaternion', 'getNormalizedGyroRate', 'getButtonState']}
+wired_port: {'pc': '/dev/ttyACM0'}
+wireless_dng: {'lowerRightLeg': 'pc', 'upperRightLeg': 'pc', 'lowerLeftLeg': 'pc', 'upperLeftLeg': 'pc'}
+wireless_id: {'lowerRightLeg': 3, 'upperRightLeg': 7, 'lowerLeftLeg': 1, 'upperLeftLeg': 2}

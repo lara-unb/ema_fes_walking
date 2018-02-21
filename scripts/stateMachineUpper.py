@@ -15,7 +15,7 @@ import time
 
 
 ####### TO DO #######
-# - remover do imu.yaml streamming de dados que não esão sendo usados
+# - remover do imu.yaml streaming de dados que não esão sendo usados
 # - remover o publish do loop da main(). Está publicando acima da taxa de atualização das imus e distorcendo o gráfico
 
 ##################################################
@@ -272,7 +272,7 @@ def upperRightLeg_buttons_callback(data):
 
 
 ##################################################
-##### Iniciação de variáveis globais ############
+######### Iniciando variáveis globais ############
 ##################################################
 lowerRightLegAngle = -1
 upperRightLegAngle = -1
@@ -283,7 +283,7 @@ leftKneeAngle = -1
 
 # estado atual
 state = state0
-# lista com todos estados, para implementação de botões
+# lista com todos estados, para implementação de botões usando outra imu
 stateList = [state0, state1, state2, state3, state4, state5]
 
 
@@ -308,8 +308,6 @@ stimMsg.pulse_width = [0, 0, 0, 0]
 ##################################################
 
 def stateMachine():
-	global state
-
 	# inicia nó
 	rospy.init_node('stateMachine', anonymous = True)
 
@@ -318,7 +316,7 @@ def stateMachine():
 	rospy.Subscriber('imu/upperRightLeg', Imu, callback = upperRightLegAngle_callback)
 	rospy.Subscriber('imu/lowerLeftLeg', Imu, callback = lowerLeftLegAngle_callback)
 	rospy.Subscriber('imu/upperLeftLeg', Imu, callback = upperLeftLegAngle_callback)
-	rospy.Subscriber('imu/upperRightLeg_buttons', Int8, callback = upperRightLeg_buttons_callback)
+	#rospy.Subscriber('imu/upperRightLeg_buttons', Int8, callback = upperRightLeg_buttons_callback)
 
 	# Publica ângulos relativos dos joelhos para mostrar em gráfico
 	plotRightKnee = rospy.Publisher('rightKneeAngle', Float64, queue_size = 10)
