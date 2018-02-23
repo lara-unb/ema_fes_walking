@@ -38,16 +38,13 @@ def state0():
 	# comando para atuador: flexão do quadril direito
 	stimMsg.pulse_width[0] = 0 # relaxa o quadríceps direito
 	stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior) direito
-	#stimMsg.pulse_width[2] = 500 # levanta o pé direito
-	#stimMsg.pulse_width[3] = 0 # relaxa panturrilhas direito
+	stimMsg.pulse_width[2] = 500 # flexão quadril direito
 
 	### PERNA ESQUERDA ###
 	# comando para atuador: extensão do quadril esquerdo
-	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[3] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	#stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
-
+	stimMsg.pulse_width[3] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[4] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[5] = 0 # relaxa quadril esquerdo
 
 	if upperRightLegAngle > 10:
 		state = state1
@@ -69,15 +66,14 @@ def state1():
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
-	#stimMsg.pulse_width[2] = 250 # meia contração do pé direito (calcanhar toca o chão primeiro)
-	#stimMsg.pulse_width[3] = 0 # relaxa panturrilha direito
-	
+	stimMsg.pulse_width[2] = 0 # relaxa quadril direito
+
 	### PERNA ESQUERDA ###
-	# comando para atuador: estabiliza o quadril esquerdo
-	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[3] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	#stimMsg.pulse_width[7] = 250 # meia contração panturrilhas esquerdo
+	# comando para atuador: extensão do quadril esquerdo
+	stimMsg.pulse_width[3] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[4] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[5] = 0 # relaxa quadril esquerdo
+
 
 	if rightKneeAngle < 10:
 		state = state2
@@ -99,15 +95,13 @@ def state2():
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior) direito
-	#stimMsg.pulse_width[2] = 0 # levanta o pé direito
-	#stimMsg.pulse_width[3] = 250 # meia contração panturrilha direito
-	
+	stimMsg.pulse_width[2] = 500 # relaxa quadril direito
+
 	### PERNA ESQUERDA ###
 	# comando para atuador: estabiliza do quadril esquerdo
-	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[3] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	#stimMsg.pulse_width[7] = 500 # contrai panturrilhas esquerdo
+	stimMsg.pulse_width[3] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[4] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[5] = 0 # relaxa quadril esquerdo
 
 	if upperRightLegAngle < 0:
 		state = state3
@@ -131,15 +125,13 @@ def state3():
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
-	#stimMsg.pulse_width[2] = 0 # levanta o pé direito
-	#stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
-	
+	stimMsg.pulse_width[2] = 0 # relaxa quadril direito
+
 	### PERNA ESQUERDA ###
 	# comando para atuador: flexão do quadril esquerdo
-	stimMsg.pulse_width[2] = 0 # relaxa o quadríceps esquerdo
-	stimMsg.pulse_width[3] = 500 # contrai o grupo isquiotíbias (posterior) esquerdo
-	#stimMsg.pulse_width[6] = 500 # levanta o pé esquerdo
-	#stimMsg.pulse_width[7] = 0 # contrai panturrilhas esquerdo
+	stimMsg.pulse_width[3] = 0 # relaxa o quadríceps esquerdo
+	stimMsg.pulse_width[4] = 500 # contrai o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[5] = 500 # flexão quadril esquerdo
 
 	if upperLeftLegAngle > 10:
 		state = state4
@@ -158,18 +150,16 @@ def state4():
 	global leftKneeAngle
 
 	### PERNA DIREITA ###
-	# comando para atuador: estabiliza do quadril direito
+	# comando para atuador: extensão o quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
-	#stimMsg.pulse_width[2] = 0 # relaxa o pé direito
-	#stimMsg.pulse_width[3] = 250 # relaxa panturrilha direito
-	
+	stimMsg.pulse_width[2] = 0 # relaxa quadril direito
+
 	### PERNA ESQUERDA ###
 	# comando para atuador: extensão o quadril esquerdo
-	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[3] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	#stimMsg.pulse_width[6] = 250 # meia contração do pé esquerdo (calcanhar toca o chão primeiro)
-	#stimMsg.pulse_width[7] = 0 # meia contração panturrilhas esquerdo
+	stimMsg.pulse_width[3] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[4] = 0 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[5] = 0 # relaxa quadril esquerdo
 
 	if leftKneeAngle < 10:
 		state = state5
@@ -190,16 +180,14 @@ def state5():
 	### PERNA DIREITA ###
 	# comando para atuador: estabiliza do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
-	stimMsg.pulse_width[1] = 0 # contrai o grupo isquiotíbias (posterior) direito
-	#stimMsg.pulse_width[2] = 0 # levanta o pé direito
-	#stimMsg.pulse_width[3] = 500 # relaxa panturrilha direito
-	
+	stimMsg.pulse_width[1] = 0 # relaxa o grupo isquiotíbias (posterior) direito
+	stimMsg.pulse_width[2] = 0 # relaxa quadril direito
+
 	### PERNA ESQUERDA ###
-	# comando para atuador: extensão do quadril esquerdo
-	stimMsg.pulse_width[2] = 500 # contrai o quadríceps esquerdo
-	stimMsg.pulse_width[3] = 500 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	#stimMsg.pulse_width[6] = 0 # relaxa o pé esquerdo
-	#stimMsg.pulse_width[7] = 250 # contrai panturrilhas esquerdo
+	# comando para atuador: extensão o quadril esquerdo
+	stimMsg.pulse_width[3] = 500 # contrai o quadríceps esquerdo
+	stimMsg.pulse_width[4] = 500 # relaxa o grupo isquiotíbias (posterior) esquerdo
+	stimMsg.pulse_width[5] = 500 # relaxa quadril esquerdo
 
 	if upperLeftLegAngle < 0:
 		state = state0	
@@ -287,21 +275,29 @@ state = state0
 stateList = [state0, state1, state2, state3, state4, state5]
 
 
+##################################################
+##### CANAIS DO ELETROESTIMIULADOR################
+##################################################
+##### DESATIVAR CANAIS NAO UTILIZADOS ############
+##### EM  EM STIMULATOR.YALM #####################
+##################################################
+
+#testar se desativar canais no stimulator.yalm é suficiente, para não ter necessidade de alterar o código aqui
+
 stimMsg = Stimulator()
 
-#[quadrícepsDireito, ísquiosDireito, 'pé caído'Direito, panturrilhaDireito, quadrícepsEsquerdo, ísquiosEsquerdo, 'pé caído'Esquerdo, panturrilhaEsquerdo]
-# Nota: músculo do 'pé caído' ativa com facilidade, usar corrente baixa
-#stimMsg.channel = [1, 2, 3, 4, 5, 6, 7, 8]
+
+#[quadrícepsDireito, ísquiosDireito, flexorQuadrilDireito, quadrícepsEsquerdo, ísquiosEsquerdo, flexorQuadrilEsquerdo]
+#stimMsg.channel = [1, 2, 3, 4, 5, 6]
 #stimMsg.mode = ['single', 'single', 'single', 'single', 'single', 'single', 'single', 'single']
-##stimMsg.pulse_current = [2, 2, 2, 2, 0, 0, 0, 0] # currenet in mA
+##stimMsg.pulse_current = [2, 2, 2, 2, 2, 2, 2, 2] # currenet in mA
 ##stimMsg.pulse_width = [0, 0, 0, 0, 0, 0, 0, 0]
 
 #[quadrícepsDireito, ísquiosDireito, quadrícepsEsquerdo, ísquiosEsquerdo]
-stimMsg.channel = [1, 2, 3, 4]
-stimMsg.mode = ['single', 'single', 'single', 'single']
-stimMsg.pulse_current = [18, 18	, 18, 16] # currenet in mA
-#stimMsg.pulse_current = [10, 10, 10, 10] # currenet in mA
-stimMsg.pulse_width = [0, 0, 0, 0]
+stimMsg.channel = [1, 2, 3, 4, 5, 6]
+stimMsg.mode = ['single'] * 6
+stimMsg.pulse_current = [2, 2, 2, 2, 2, 2] # calibrar pra cada paciente
+stimMsg.pulse_width = [0] * 6
 
 ##################################################
 ##### Loop do ROS ################################

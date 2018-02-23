@@ -1,6 +1,3 @@
-a = 2
+b = ['single'] * 3
 
-def b():
-	print(a)
-
-b()
+print(b)

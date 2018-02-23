@@ -9,6 +9,8 @@
 # ts2:            inter-pulse time in ms (1.5-17 ms in 0.5 steps)
 
 port: /dev/ttyUSB0
+#[quadrícepsDireito, ísquiosDireito, flexorQuadrilDireito, quadrícepsEsquerdo, ísquiosEsquerdo, flexorQuadrilEsquerdo]
+#channel_stim: [1, 2, 3, 4, 5, 6]
 channel_stim: [1, 2, 3, 4]
 channel_lf: []
 n_factor: 0
