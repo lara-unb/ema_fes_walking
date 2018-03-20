@@ -95,7 +95,7 @@ def state2():
 	# comando para atuador: extensão do quadril direito
 	stimMsg.pulse_width[0] = 500 # contrai o quadríceps direito
 	stimMsg.pulse_width[1] = 500 # contrai o grupo isquiotíbias (posterior) direito
-	stimMsg.pulse_width[2] = 500 # relaxa quadril direito
+	stimMsg.pulse_width[2] = 0 # relaxa quadril direito
 
 	### PERNA ESQUERDA ###
 	# comando para atuador: estabiliza do quadril esquerdo
@@ -187,7 +187,7 @@ def state5():
 	# comando para atuador: extensão o quadril esquerdo
 	stimMsg.pulse_width[3] = 500 # contrai o quadríceps esquerdo
 	stimMsg.pulse_width[4] = 500 # relaxa o grupo isquiotíbias (posterior) esquerdo
-	stimMsg.pulse_width[5] = 500 # relaxa quadril esquerdo
+	stimMsg.pulse_width[5] = 0 # relaxa quadril esquerdo
 
 	if upperLeftLegAngle < 0:
 		state = state0	

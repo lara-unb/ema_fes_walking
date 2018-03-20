@@ -29,8 +29,6 @@ def bodyAngle_callback(data):
 	euler = transformations.euler_from_quaternion([qx, qy, qz, qw], axes='syxz')
 
 	pubUpperLegAngle.publish(euler[0] * (180/pi))
-	pubUpperLegAngle1.publish(euler[1] * (180/pi))
-	pubUpperLegAngle2.publish(euler[2] * (180/pi))
 
 
 
@@ -45,11 +43,12 @@ def recorder():
 
 	rospy.init_node('recorder', anonymous = True)
 	pubUpperLegAngle = rospy.Publisher('upperLegAngle', Float64, queue_size = 10)
-	pubUpperLegAngle1 = rospy.Publisher('upperLegAngle1', Float64, queue_size = 10)
-	pubUpperLegAngle2 = rospy.Publisher('upperLegAngle2', Float64, queue_size = 10)
 	rospy.Subscriber('imu/angle', Imu, callback = bodyAngle_callback)
 
+	rate = rospy.rate(50)
+
 	while not rospy.is_shutdown():
+		rate.sleep()
 		pass
 
 
