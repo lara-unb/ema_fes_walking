@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>ema_tao</name>
+  <name>ema_fes_walking</name>
   <version>0.1.0</version>
-  <description>The ema_tao package</description>
+  <description>The ema_fes_walking package</description>
 
   <maintainer email="georgebrindeiro@lara.unb.br">George Brindeiro</maintainer>
 
@@ -11,7 +11,7 @@
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
   <license>TODO</license>
 
-  <url type="website">https://github.com/lara-unb/ema-tao</url>
+  <url type="website">https://github.com/lara-unb/ema_fes_walking</url>
 
 
   <author email="lucasfonseca27@gmail.com">Lucas Fonseca</author>

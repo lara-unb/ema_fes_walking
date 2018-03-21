@@ -1,0 +1,16 @@
+<launch>
+  <group ns="ema">
+  <rosparam command="load" file="$(find ema_fes_walking)/config/stateMachine.yaml" ns="imu" />
+  
+  <node name="imu" pkg="yostlabs_3space_imu" type="imu_node.py" output="screen" />
+  
+  <!-- CODIGO RAPHAEL - THRESHOLD PARA ESTIMULAÇÃO-->
+  <node name="stateMachine" pkg="ema_fes_walking" type="stateMachine.py" output="screen" />
+
+  </group>
+
+  <!-- launch utils 
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ema_tao)/config/rviz/imu.rviz" output="log" respawn="true" respawn_delay="5"/>
+  <node name="rqt_graph" pkg="rqt_graph" type="rqt_graph" output="log" respawn="true" respawn_delay="5"/> -->
+  <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot" output="log" respawn="true" respawn_delay="5"/>
+</launch>
